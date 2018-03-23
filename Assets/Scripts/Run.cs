@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Run : MonoBehaviour {
 
-    public float speed;
-//<<<<<< HEAD
-    public float jump;
-//=======
-//>>>>>>> b1e36a1871bb26ec8bd9f78debf7b4647705194b
+    public float speed = 30;
+
+    public float jump = 4;
     private Rigidbody rb;
-	
-	void Start () {
+    Vector3 jumpDirection = new Vector3(0.0f, 1.0f, 0.0f);
+    void Start () {
+        
         rb = GetComponent<Rigidbody>();
 	}
 	
@@ -20,14 +19,15 @@ public class Run : MonoBehaviour {
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
+        
         rb.AddForce(movement * speed);
-	}
-//<<<<<<< HEAD
-//=======
+    }
+
     private void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(jumpDirection * jump);
+        }
     }
-//>>>>>>> b1e36a1871bb26ec8bd9f78debf7b4647705194b
 }
